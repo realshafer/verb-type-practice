@@ -20,11 +20,17 @@ function setup(){
   fSize = width / 10;
   textAlign(CENTER);
   fill(255);
-  textSize(fSize/2);
 
+  // Title
+  let titleSize = fSize / 2;
+  textSize(titleSize);
   text("Reverb Type Practice", width / 2, height / 9);
-  textSize(fSize/4);
-  text("Natural, Spring, Plate, or Algorithmic", width / 2, (height / 9) * 2.2 - fSize);
+
+  // Subtitle
+  let subtitleSize = fSize / 4;
+  textSize(subtitleSize);
+  let lineSpacing = subtitleSize * 1.5; // add extra spacing between lines
+  text("Natural, Spring, Plate, or Algorithmic", width / 2, height / 9 + lineSpacing);
 
   // choose first random sound
   chooseSound();
