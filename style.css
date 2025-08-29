@@ -2,6 +2,13 @@ html, body {
   margin: 0;
   padding: 0;
 }
-canvas {
+
+/*canvas {
   display: block;
+}*/
+
+#sketch-holder canvas {
+  display: block;
+  margin: 20px auto;
+  border: 2px solid black;
 }
