@@ -29,36 +29,40 @@ function setup(){
   // Subtitle
   let subtitleSize = fSize / 4;
   textSize(subtitleSize);
-  let lineSpacing = subtitleSize * 1.5; // add extra spacing between lines
+  let lineSpacing = subtitleSize * 1.5; // spacing between title and subtitle
   text("Natural, Spring, Plate, or Algorithmic", width / 2, height / 9 + lineSpacing);
 
   // choose first random sound
   chooseSound();
-  player.amp(0.8);
+
+  // Button sizing + layout
+  let btnW = width * 0.25;   // 25% of canvas width
+  let btnH = 60;             // fixed button height
+  let buttonYStart = height / 3; // start 1/3 down from top
 
   // PLAY button
   playButton = createButton('PLAY');
-  playButton.position(width / 2 - fSize * 4, (height / 9) * 3 - fSize);
-  playButton.size(fSize * 8, fSize * 2);
-  playButton.style('font-size', 'xx-large');
+  playButton.size(btnW, btnH);
+  playButton.position(width/2 - btnW/2, buttonYStart);
+  playButton.style('font-size', '20px');
   playButton.style('background-color','#00E938');
   playButton.style('color','#000000');  
   playButton.mousePressed(togglePlay);
 
   // STOP button
   stopButton = createButton('STOP');
-  stopButton.position(width / 2 - fSize * 4, (height / 9) * 5 - fSize);
-  stopButton.size(fSize * 8, fSize * 2);
-  stopButton.style('font-size', 'xx-large');
+  stopButton.size(btnW, btnH);
+  stopButton.position(width/2 - btnW/2, buttonYStart + btnH + 20);
+  stopButton.style('font-size', '20px');
   stopButton.style('background-color','#F80F05');
   stopButton.style('color','#FDFAFA');
   stopButton.mousePressed(stopSound);
 
   // ANSWER button
   answerButton = createButton('ANSWER');
-  answerButton.position(width / 2 - fSize * 4, (height / 9) * 7 - fSize);
-  answerButton.size(fSize * 8, fSize * 2);
-  answerButton.style('font-size', 'xx-large');
+  answerButton.size(btnW, btnH);
+  answerButton.position(width/2 - btnW/2, buttonYStart + (btnH + 20) * 2);
+  answerButton.style('font-size', '20px');
   answerButton.style('background-color','#03A9F4');
   answerButton.style('color','#000000');  
   answerButton.mousePressed(showAnswer);
@@ -76,9 +80,8 @@ function togglePlay() {
   }
 }
 
-
 function stopSound(){
-  player.stop();
+  if (player) player.stop();
 }
 
 function showAnswer() {
