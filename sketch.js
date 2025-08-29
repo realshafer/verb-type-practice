@@ -1,30 +1,35 @@
-let sound1, sound2, sound3, sound4, playButton, stopButton, player, file;
+let sound1, sound2, sound3, sound4, sound5, sound6, sound7, sound8;
+let playButton, stopButton, answerButton;
+let player, fileName, fSize;
 
 function preload() {
-  sound1 = loadSound('assets/rain1.mp3');
-  sound2 = loadSound('assets/rain2.mp3');
-  sound3 = loadSound('assets/rain3.mp3');
-  sound4 = loadSound('assets/rain4.mp3');
-  sound5 = loadSound('assets/rain5.mp3');
-  sound6 = loadSound('assets/rain6.mp3');
+  sound1 = loadSound('assets/DrumHall.mp3');
+  sound2 = loadSound('assets/DrumAlgo.mp3');
+  sound3 = loadSound('assets/DrumSpring.mp3');
+  sound4 = loadSound('assets/DrumPlate.mp3');
+  sound5 = loadSound('assets/VoxHall.mp3');
+  sound6 = loadSound('assets/VoxAlgo.mp3');
+  sound7 = loadSound('assets/VoxSpring.mp3');
+  sound8 = loadSound('assets/VoxPlate.mp3');
 }
-  
+
 function setup(){  
   createCanvas(windowWidth, windowHeight);
-
   background(0);
-  
+
   fSize = width / 10;
   textAlign(CENTER);
   fill(255);
   textSize(fSize/2);
-  
-  text("Rainforest", width / 2, height / 9);
-  text("David Tudor",width / 2, (height / 9) * 2.2 - fSize);
-  
+
+  text("Reverb Type Practice", width / 2, height / 9);
+  text("Natural, Spring, Plate, or Algorithmic", width / 2, (height / 9) * 2.2 - fSize);
+
+  // choose first random sound
   chooseSound();
   player.amp(0.8);
-  
+
+  // PLAY button
   playButton = createButton('PLAY');
   playButton.position(width / 2 - fSize * 4, (height / 9) * 3 - fSize);
   playButton.size(fSize * 8, fSize * 2);
@@ -32,42 +37,65 @@ function setup(){
   playButton.style('background-color','#00E938');
   playButton.style('color','#000000');  
   playButton.mousePressed(togglePlay);
-  
+
+  // STOP button
   stopButton = createButton('STOP');
   stopButton.position(width / 2 - fSize * 4, (height / 9) * 5 - fSize);
   stopButton.size(fSize * 8, fSize * 2);
   stopButton.style('font-size', 'xx-large');
   stopButton.style('background-color','#F80F05');
   stopButton.style('color','#FDFAFA');
-  stopButton.mousePressed(function stopSound(){
-    player.stop();
-  })
+  stopButton.mousePressed(stopSound);
+
+  // ANSWER button
+  answerButton = createButton('ANSWER');
+  answerButton.position(width / 2 - fSize * 4, (height / 9) * 7 - fSize);
+  answerButton.size(fSize * 8, fSize * 2);
+  answerButton.style('font-size', 'xx-large');
+  answerButton.style('background-color','#03A9F4');
+  answerButton.style('color','#000000');  
+  answerButton.mousePressed(showAnswer);
 }
-  
-  
+
 function togglePlay() {
-  if (player.isPlaying()) {
-    // player.pause();
+  if (player && player.isPlaying()) {
+    // player.pause(); // optional if you want pause functionality
   } else {
     chooseSound();
+    player.amp(0.8);
     player.loop();
+    // reset the button text every time play is pressed
+    answerButton.html("ANSWER");
   }
 }
-  
-  
+
+
+function stopSound(){
+  player.stop();
+}
+
+function showAnswer() {
+  // reveal the description when clicked
+  answerButton.html(fileName);
+}
+
 function chooseSound(){
-  file = random(0,6);
-  if (file < 1) {
-    player = sound1;
-  } else if (file > 1 && file < 2) {
-    player = sound2;
-  } else if (file > 2 && file < 3) {
-    player = sound3;
-  } else if (file > 3 && file < 4) {
-    player = sound4;
-  } else if (file > 4 && file < 5) {
-    player = sound5;
-  } else if (file > 5 && file < 6) {
-    player = sound6;
+  let choice = int(random(8));  // 0–7
+  if (choice === 0) {
+    player = sound1; fileName = "Natural Hall Reverb";
+  } else if (choice === 1) {
+    player = sound2; fileName = "Digital Algorithmic Reverb";
+  } else if (choice === 2) {
+    player = sound3; fileName = "Spring Reverb";
+  } else if (choice === 3) {
+    player = sound4; fileName = "Plate Reverb";
+  } else if (choice === 4) {
+    player = sound5; fileName = "Natural Hall Reverb";
+  } else if (choice === 5) {
+    player = sound6; fileName = "Digital Algorithmic Reverb";
+  } else if (choice === 6) {
+    player = sound7; fileName = "Spring Reverb";
+  } else {
+    player = sound8; fileName = "Plate Reverb";
   }
 }
