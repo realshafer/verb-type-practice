@@ -12,3 +12,10 @@ html, body {
   margin: 20px auto;
   border: 2px solid black;
 }
+
+button {
+  font-size: 20px !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 10px 20px !important;
+}
