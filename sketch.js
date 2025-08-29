@@ -20,7 +20,7 @@ function setup(){
   fSize = width / 10;
   textAlign(CENTER);
   fill(255);
-  textSize(fSize/2);
+  textSize(fSize/4);
 
   text("Reverb Type Practice", width / 2, height / 9);
   text("Natural, Spring, Plate, or Algorithmic", width / 2, (height / 9) * 2.2 - fSize);
