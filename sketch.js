@@ -89,8 +89,21 @@ function showAnswer() {
   answerButton.html(fileName);
 }
 
-function chooseSound(){
-  let choice = int(random(8));  // 0–7
+let lastChoice = -1;
+let secondLastChoice = -1;
+
+function chooseSound() {
+  let choice;
+
+  do {
+    choice = int(random(8));  // 0–7
+  } while (choice === lastChoice && choice === secondLastChoice);
+
+  // update the tracking variables
+  secondLastChoice = lastChoice;
+  lastChoice = choice;
+
+  // assign player and fileName
   if (choice === 0) {
     player = sound1; fileName = "Natural Hall Reverb";
   } else if (choice === 1) {
@@ -109,3 +122,4 @@ function chooseSound(){
     player = sound8; fileName = "Plate Reverb";
   }
 }
+
